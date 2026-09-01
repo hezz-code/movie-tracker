@@ -1,0 +1,146 @@
+Since you've already got your TMDB API key and you're building this as a small Python project, I'd start simple and build it up gradually.
+
+1. Decide what the first version should do
+
+Don't try to build Letterboxd immediately. Your MVP (minimum viable product) could be:
+
+Search for a movie
+Show its:
+Title
+Release date
+Overview
+Rating
+Poster
+Let the user add it to their watchlist
+Let the user mark it as watched
+Give it a personal rating
+Save the user's movies locally
+
+That is already a solid Year 1 → Year 2 level project.
+
+2. Set up your project
+
+I'd structure it roughly like:
+
+Movie-Tracker/
+│
+├── main.py
+├── tmdb_api.py
+├── movies.py
+├── database.py
+├── requirements.txt
+├── .gitignore
+└── README.md
+
+You don't need all of these immediately. Start with just main.py and tmdb_api.py.
+
+3. First goal: make one TMDB request
+
+Install the requests library:
+
+pip install requests
+
+Then create tmdb_api.py.
+
+Your first objective isn't to build the whole app. It's simply:
+
+User enters "Interstellar" → Python asks TMDB → Python gets the movie information back.
+
+For example, conceptually:
+
+User
+ ↓
+"Interstellar"
+ ↓
+Python
+ ↓
+TMDB API
+ ↓
+Movie information
+ ↓
+Python displays it
+
+Once you can successfully do that, you've got the core of the project working.
+
+4. Then build the application around it
+
+I'd develop it in this order:
+
+Stage 1 — API
+
+Connect Python to TMDB
+Search movies
+Get movie details
+Handle errors
+
+Stage 2 — Interface
+
+Create a menu
+Search for movies
+Display results
+Allow the user to select a movie
+
+Something like:
+
+===== MOVIE TRACKER =====
+
+1. Search for a movie
+2. My watchlist
+3. Watched movies
+4. Exit
+
+Choose an option:
+
+Stage 3 — Tracking
+
+Add movie to watchlist
+Remove movie
+Mark as watched
+Give personal rating
+
+Stage 4 — Persistence
+
+Save the data so it doesn't disappear when Python closes.
+
+For your first version, a JSON file is perfectly reasonable:
+
+movies.json
+
+Later, you could replace this with SQLite, which would make the project considerably more interesting.
+
+Stage 5 — Improve it
+
+Search by genre
+Sort by rating
+Filter watched/unwatched
+Movie recommendations
+Actor/director information
+Watch statistics
+Better interface
+5. Don't start with a GUI
+
+Given that your biggest Python project so far was the vending machine, I'd avoid starting with Tkinter/PyQt/etc.
+
+Start with a command-line application.
+
+Get this working:
+
+Search movie: Interstellar
+
+1. Interstellar (2014)
+   Rating: 8.4
+   Add to watchlist? y
+
+Movie added!
+
+Then once the underlying Python works, you can make a GUI/web interface around it.
+
+Your first milestone
+
+For now, forget about the tracker itself.
+
+Your first task should be:
+
+Make tmdb_api.py accept a movie name and print the TMDB search results.
+
+Once you've got that working, the next step is turning those results into a proper movie object and building your menu around it.
